@@ -2,7 +2,6 @@
 
 {
   imports = [
-    ./theme.nix
     ./mangowm.nix
     ./openrc.nix
   ];
@@ -13,30 +12,30 @@
 
   # Nix on Non-NixOS (Devuan) tweaks
   targets.genericLinux.enable = true;
-  
-  # Disable systemd services as we are on OpenRC
   systemd.user.enable = false;
 
   home.packages = with pkgs; [
-    # Dev Tools
+    # Core Tools
     git
     vim
-    wget
-    curl
-    
-    # Media
-    mpv
-    imv
+    kitty
+    chromium
     
     # Nix helpers
     nh
     nix-output-monitor
-    nvd
   ];
 
   # Dank Material Shell
   programs.dank-material-shell.enable = true;
 
-  # Let Home Manager install and manage itself.
+  # Basic Kitty Config (No Catppuccin)
+  programs.kitty = {
+    enable = true;
+    settings = {
+      background_opacity = "0.9";
+    };
+  };
+
   programs.home-manager.enable = true;
 }
