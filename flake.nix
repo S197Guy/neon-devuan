@@ -14,16 +14,16 @@
       inputs.nixpkgs.follows = "nixpkgs";
     };
 
-    dms-shell = {
-      url = "github:DreamMaoMao/dms-shell";
+    # Reverting to AvengeMedia/DankMaterialShell as 'dms'
+    dms = {
+      url = "github:AvengeMedia/DankMaterialShell";
       inputs.nixpkgs.follows = "nixpkgs";
     };
 
-    # Essential for OpenGL/EGL on non-NixOS
     nixgl.url = "github:nix-community/nixGL";
   };
 
-  outputs = { self, nixpkgs, home-manager, mangowm, dms-shell, nixgl, ... }@inputs:
+  outputs = { self, nixpkgs, home-manager, mangowm, dms, nixgl, ... }@inputs:
     let
       system = "x86_64-linux";
       pkgs = nixpkgs.legacyPackages.${system};
@@ -38,6 +38,7 @@
         extraSpecialArgs = { inherit inputs; };
         modules = [
           ./modules/home.nix
+          dms.homeModules.dank-material-shell
         ];
       };
     };

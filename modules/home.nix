@@ -1,4 +1,4 @@
-{ pkgs, inputs, ... }:
+{ pkgs, ... }:
 
 {
   imports = [
@@ -29,11 +29,11 @@
     slurp
     
     # nixGL for hardware acceleration
-    inputs.nixgl.packages.${pkgs.system}.nixGLIntel
-    
-    # The Shell
-    inputs.dms-shell.packages.${pkgs.system}.default
+    # Use nixGLIntel if on the S340's i5-8265U
   ];
+
+  # Enable Dank Material Shell (AvengeMedia version)
+  programs.dank-material-shell.enable = true;
 
   programs.home-manager.enable = true;
 }

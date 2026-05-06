@@ -3,10 +3,11 @@
 {
   home.packages = [
     inputs.mangowm.packages.${pkgs.system}.default
+    inputs.nixgl.packages.${pkgs.system}.nixGLIntel
   ];
 
   xdg.configFile."mango/config.conf".text = ''
-    # neon-Devuan MangoWM PoC Config (DMS Optimized)
+    # neon-Devuan MangoWM PoC Config
     
     # SceneFX Visuals
     corner_radius = 12
@@ -20,8 +21,7 @@
     bind = Mod, M, exit,
     
     # Launch Dank Material Shell (DMS) on startup
-    # Note: Using 'dms-shell' from DreamMaoMao
-    exec-once = dms-shell
+    exec-once = dms run
   '';
   
   # Helper script to launch MangoWM with nixGL
