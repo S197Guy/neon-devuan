@@ -7,7 +7,10 @@ command_background="yes"
 pidfile="/run/nix-daemon.pid"
 
 depend() {
-    need net
+    # 'use net' is less strict than 'need net'
+    # It will start even if the virtual 'net' service isn't explicitly provided
+    use net
+    after network
     before dbus
 }
 
