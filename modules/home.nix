@@ -27,6 +27,9 @@
     nvd
   ];
 
+  # Dank Material Shell
+  programs.dank-material-shell.enable = true;
+
   # Let Home Manager install and manage itself.
   programs.home-manager.enable = true;
 }

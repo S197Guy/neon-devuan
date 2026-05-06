@@ -23,13 +23,13 @@
     outer_gap = 15
     
     # Keybinds
-    # Mod+B for browser (Chromium as established earlier)
+    # Mod+B for browser
     bind = Mod, B, spawn, chromium
     bind = Mod, Return, spawn, kitty
     bind = Mod, Q, killactive,
     bind = Mod, M, exit,
     
-    # Launch Noctalia on startup
-    exec-once = qs -c noctalia-shell
+    # Launch Dank Material Shell on startup
+    exec-once = dms run
   '';
 }

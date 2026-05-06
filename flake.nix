@@ -16,13 +16,13 @@
       inputs.nixpkgs.follows = "nixpkgs";
     };
 
-    noctalia-shell = {
-      url = "github:noctalia-dev/noctalia-shell";
-      flake = false;
+    dms = {
+      url = "github:AvengeMedia/DankMaterialShell";
+      inputs.nixpkgs.follows = "nixpkgs";
     };
   };
 
-  outputs = { self, nixpkgs, home-manager, catppuccin, mangowm, ... }@inputs:
+  outputs = { self, nixpkgs, home-manager, catppuccin, mangowm, dms, ... }@inputs:
     let
       system = "x86_64-linux";
       pkgs = nixpkgs.legacyPackages.${system};
@@ -33,6 +33,7 @@
         modules = [
           ./modules/home.nix
           catppuccin.homeManagerModules.catppuccin
+          dms.homeModules.dank-material-shell
         ];
       };
     };
