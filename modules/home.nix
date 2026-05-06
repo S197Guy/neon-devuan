@@ -1,4 +1,4 @@
-{ pkgs, inputs, ... }:
+{ pkgs, ... }:
 
 {
   imports = [
@@ -12,24 +12,24 @@
 
   # Nix on Non-NixOS (Devuan) tweaks
   targets.genericLinux.enable = true;
+  
+  # Ensure no systemd services are attempted
   systemd.user.enable = false;
 
   home.packages = with pkgs; [
-    # Core Tools
     git
     vim
     kitty
     chromium
-    
-    # Nix helpers
     nh
     nix-output-monitor
   ];
 
-  # Dank Material Shell
+  # Note: Dank Material Shell (DMS) might be causing build issues if it tries 
+  # to build complex dependencies or create systemd services.
+  # We will keep it enabled but be aware it might be the source of 'make-derivation' errors.
   programs.dank-material-shell.enable = true;
 
-  # Basic Kitty Config (No Catppuccin)
   programs.kitty = {
     enable = true;
     settings = {
