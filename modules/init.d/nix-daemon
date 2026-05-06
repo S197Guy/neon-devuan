@@ -7,13 +7,15 @@ command_background="yes"
 pidfile="/run/nix-daemon.pid"
 
 depend() {
-    # 'use net' is less strict than 'need net'
-    # It will start even if the virtual 'net' service isn't explicitly provided
+    # Nix needs the filesystem to be mounted
+    need localmount
+    # We want it after basic system initialization
+    after bootmisc
+    # Network is optional but useful
     use net
-    after network
-    before dbus
 }
 
 start_pre() {
+    # Ensure the socket directory exists with correct permissions
     checkpath -d -m 0755 /nix/var/nix/daemon-socket
 }
