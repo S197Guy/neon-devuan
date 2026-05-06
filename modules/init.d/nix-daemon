@@ -1,0 +1,16 @@
+#!/sbin/openrc-run
+
+description="Nix multi-user build daemon"
+
+command="/nix/var/nix/profiles/default/bin/nix-daemon"
+command_background="yes"
+pidfile="/run/nix-daemon.pid"
+
+depend() {
+    need net
+    before dbus
+}
+
+start_pre() {
+    checkpath -d -m 0755 /nix/var/nix/daemon-socket
+}
