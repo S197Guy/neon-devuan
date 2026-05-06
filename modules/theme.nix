@@ -15,12 +15,16 @@
     noto-fonts-emoji
   ];
 
-  # GTK/QT Theming (if possible via HM on Devuan)
-  gtk = {
-    enable = true;
-    catppuccin.enable = true;
-    catppuccin.cursor.enable = true;
-  };
+  # GTK Theming via the Catppuccin Flake
+  gtk.enable = true;
+  catppuccin.gtk.enable = true;
+  catppuccin.gtk.flavor = "mocha";
+  catppuccin.gtk.accent = "pink";
+
+  # Cursors
+  catppuccin.cursors.enable = true;
+  catppuccin.cursors.flavor = "mocha";
+  catppuccin.cursors.accent = "pink";
 
   qt = {
     enable = true;
