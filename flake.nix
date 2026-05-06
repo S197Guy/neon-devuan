@@ -1,5 +1,5 @@
 {
-  description = "neon-Devuan: Minimal Proof of Concept (PoC)";
+  description = "neon-Devuan: Beautiful, minimal Devuan configuration with Nix";
 
   inputs = {
     nixpkgs.url = "github:nixos/nixpkgs/nixos-unstable";
@@ -14,13 +14,16 @@
       inputs.nixpkgs.follows = "nixpkgs";
     };
 
-    dms = {
-      url = "github:AvengeMedia/DankMaterialShell";
+    dms-shell = {
+      url = "github:DreamMaoMao/dms-shell";
       inputs.nixpkgs.follows = "nixpkgs";
     };
+
+    # Essential for OpenGL/EGL on non-NixOS
+    nixgl.url = "github:nix-community/nixGL";
   };
 
-  outputs = { self, nixpkgs, home-manager, mangowm, dms, ... }@inputs:
+  outputs = { self, nixpkgs, home-manager, mangowm, dms-shell, nixgl, ... }@inputs:
     let
       system = "x86_64-linux";
       pkgs = nixpkgs.legacyPackages.${system};
@@ -35,7 +38,6 @@
         extraSpecialArgs = { inherit inputs; };
         modules = [
           ./modules/home.nix
-          dms.homeModules.dank-material-shell
         ];
       };
     };

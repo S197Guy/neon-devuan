@@ -6,11 +6,12 @@
   ];
 
   xdg.configFile."mango/config.conf".text = ''
-    # neon-Devuan MangoWM PoC Config
+    # neon-Devuan MangoWM PoC Config (DMS Optimized)
     
-    # Simple Visuals
-    corner_radius = 10
+    # SceneFX Visuals
+    corner_radius = 12
     shadows = true
+    blur = true
     
     # Keybinds
     bind = Mod, B, spawn, chromium
@@ -18,7 +19,17 @@
     bind = Mod, Q, killactive,
     bind = Mod, M, exit,
     
-    # Launch Shell
-    exec-once = dms run
+    # Launch Dank Material Shell (DMS) on startup
+    # Note: Using 'dms-shell' from DreamMaoMao
+    exec-once = dms-shell
   '';
+  
+  # Helper script to launch MangoWM with nixGL
+  home.file.".local/bin/start-neon".text = ''
+    #!/bin/bash
+    # Launch MangoWM with hardware acceleration on Devuan
+    nixGLIntel mangowm
+  '';
+  
+  home.file.".local/bin/start-neon".executable = true;
 }
