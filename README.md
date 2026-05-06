@@ -4,7 +4,7 @@ A beautiful, minimal, and pastel-themed Devuan Linux configuration managed the *
 
 ## 🎨 Aesthetic
 - **Theme:** Catppuccin (Pastels)
-- **Window Manager:** [MangoWM](https://github.com/mangowm/mangowm) (dwl-based with scenefx animations)
+- **Window Manager:** [MangoWM](https://github.com/mangowm/mango) (dwl-based with scenefx animations)
 - **Desktop Shell:** [Dank Material Shell (DMS)](https://github.com/AvengeMedia/DankMaterialShell)
 
 ## 🛠️ Infrastructure

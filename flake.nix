@@ -12,7 +12,7 @@
     catppuccin.url = "github:catppuccin/nix";
     
     mangowm = {
-      url = "github:mangowm/mangowm";
+      url = "github:mangowm/mango";
       inputs.nixpkgs.follows = "nixpkgs";
     };
 
