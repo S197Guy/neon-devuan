@@ -30,7 +30,7 @@ cd neon-devuan
 Once Nix is installed, you can apply the Home Manager configuration directly from the flake:
 
 ```bash
-nix run .#home-manager -- switch --flake .#neon-devuan
+nix run .#home-manager -- switch --flake .#neonscar
 ```
 
 ### 3. Launching the Environment

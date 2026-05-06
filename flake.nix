@@ -27,7 +27,13 @@
       system = "x86_64-linux";
       pkgs = nixpkgs.legacyPackages.${system};
     in {
-      homeConfigurations."neon-devuan" = home-manager.lib.homeManagerConfiguration {
+      # Expose home-manager package so 'nix run .#home-manager' works
+      packages.${system} = {
+        home-manager = home-manager.packages.${system}.home-manager;
+        default = self.packages.${system}.home-manager;
+      };
+
+      homeConfigurations."neonscar" = home-manager.lib.homeManagerConfiguration {
         inherit pkgs;
         extraSpecialArgs = { inherit inputs; };
         modules = [
