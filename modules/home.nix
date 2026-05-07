@@ -4,6 +4,7 @@
   imports = [
     ./mangowm.nix
     ./openrc.nix
+    ./kitty.nix
   ];
 
   home.username = "neonscar";
@@ -17,7 +18,7 @@
     # Core Tools
     git
     vim
-    kitty
+    # kitty is now managed via programs.kitty in kitty.nix
     chromium
     
     # Mango/DMS Dependencies
@@ -29,7 +30,6 @@
     slurp
     
     # nixGL for hardware acceleration
-    # Use nixGLIntel if on the S340's i5-8265U
   ];
 
   # Enable Dank Material Shell (AvengeMedia version)
