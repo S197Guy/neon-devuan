@@ -5,6 +5,9 @@
     inputs.mangowm.packages.${pkgs.system}.default
     inputs.nixgl.packages.${pkgs.system}.nixGLIntel
     pkgs.wlr-randr
+    pkgs.lxqt.lxqt-policykit
+    pkgs.xwayland-satellite
+    pkgs.xwayland
   ];
 
   xdg.configFile."mango/config.conf".text = ''
@@ -24,6 +27,12 @@
     bind = SUPER, Q, killclient,
     bind = SUPER, M, quit,
     
+    # Authentication Agent
+    exec-once = lxqt-policykit-agent
+    
+    # XWayland Support (for X11 app compatibility)
+    exec-once = xwayland-satellite
+    
     # Launch Dank Material Shell (DMS) on startup
     exec-once = dms run
     
@@ -38,7 +47,6 @@
     export WLR_NO_HARDWARE_CURSORS=1
     
     # Launch MangoWM with hardware acceleration on Devuan
-    # nixGLIntel is used but if virgl is detected it should bridge to host
     nixGLIntel mango
   '';
   
