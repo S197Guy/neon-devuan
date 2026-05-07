@@ -10,15 +10,15 @@
     # neon-Devuan MangoWM PoC Config
     
     # SceneFX Visuals
-    corner_radius = 12
-    shadows = true
-    blur = true
+    border_radius = 12
+    shadows = 1
+    blur = 1
     
     # Keybinds
-    bind = Mod, B, spawn, chromium
-    bind = Mod, Return, spawn, kitty
-    bind = Mod, Q, killactive,
-    bind = Mod, M, exit,
+    bind = SUPER, B, spawn, chromium
+    bind = SUPER, Return, spawn, kitty
+    bind = SUPER, Q, killclient,
+    bind = SUPER, M, quit,
     
     # Launch Dank Material Shell (DMS) on startup
     exec-once = dms run
@@ -28,7 +28,7 @@
   home.file.".local/bin/start-neon".text = ''
     #!/bin/bash
     # Launch MangoWM with hardware acceleration on Devuan
-    nixGLIntel mangowm
+    nixGLIntel mango
   '';
   
   home.file.".local/bin/start-neon".executable = true;
