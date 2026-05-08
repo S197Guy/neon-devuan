@@ -7,11 +7,9 @@ command_background="yes"
 pidfile="/run/nix-daemon.pid"
 
 depend() {
-    # Nix needs the filesystem to be mounted
-    need localmount
-    # We want it after basic system initialization
+    # Use 'after localmount' instead of 'need' to avoid hard-fail on some Devuan setups
+    after localmount
     after bootmisc
-    # Network is optional but useful
     use net
 }
 
