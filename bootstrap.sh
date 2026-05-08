@@ -9,7 +9,7 @@ echo "🌸 Starting neon-Devuan Bootstrap..."
 # 1. Install System Dependencies
 echo "📦 Installing base system dependencies..."
 sudo apt update
-sudo apt install -y build-essential cmake meson pkg-config libegl1 mesa-vulkan-drivers libgl1-mesa-dri elogind libpam-elogind git curl xz-utils
+sudo apt install -y build-essential cmake meson pkg-config libegl1 mesa-vulkan-drivers libgl1-mesa-dri elogind libpam-elogind git curl xz-utils unzip fontconfig
 
 # 2. Install Nix (OpenRC Optimized)
 if ! command -v nix &> /dev/null; then
@@ -39,5 +39,13 @@ export NIX_REMOTE=daemon
 export NIX_SSL_CERT_FILE=/etc/ssl/certs/ca-certificates.crt
 [ -f "$HOME/.nix-profile/etc/profile.d/nix.sh" ] && . "$HOME/.nix-profile/etc/profile.d/nix.sh"
 VARS
+
+# 6. Install JetBrainsMono Nerd Font
+echo "🎨 Installing JetBrainsMono Nerd Font..."
+mkdir -p ~/.local/share/fonts
+curl -L https://github.com/ryanoasis/nerd-fonts/releases/latest/download/JetBrainsMono.zip -o /tmp/JetBrainsMono.zip
+unzip -o /tmp/JetBrainsMono.zip -d ~/.local/share/fonts
+rm /tmp/JetBrainsMono.zip
+fc-cache -fv
 
 echo "🚀 Bootstrap complete! Please RESTART your machine."
