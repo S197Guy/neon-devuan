@@ -6,6 +6,25 @@ let
   mango = inputs.mangowm.packages.${pkgs.system}.default;
   nixGL = inputs.nixgl.packages.${pkgs.system}.nixGLIntel;
   
+  gpu-link-service = pkgs.writeText "nix-gpu-link" ''
+    #!/sbin/openrc-run
+    # OpenRC service to ensure Nix GPU driver link exists on boot
+    
+    description="Nix GPU driver symlink for non-NixOS"
+    
+    depend() {
+        need localmount
+        before greetd
+    }
+    
+    start() {
+        ebegin "Linking Nix GPU driver to /run/opengl-driver"
+        mkdir -p /run/opengl-driver
+        ln -sfT /nix/store/wdwzqr4z406anyym15qyqf8imk1nvi04-non-nixos-gpu /run/opengl-driver
+        eend $?
+    }
+  '';
+
   greeter-script = pkgs.writeShellScriptBin "dms-greeter-wrapped" ''
     # Add necessary tools to PATH
     export PATH="${pkgs.lib.makeBinPath [
@@ -37,26 +56,6 @@ in
 {
   home.packages = [ greeter-script ];
   
-  # Helper for OpenRC persistence
-  home.file."modules/init.d/nix-gpu-link".text = ''
-    #!/sbin/openrc-run
-    # OpenRC service to ensure Nix GPU driver link exists on boot
-    
-    description="Nix GPU driver symlink for non-NixOS"
-    
-    depend() {
-        need localmount
-        before greetd
-    }
-    
-    start() {
-        ebegin "Linking Nix GPU driver to /run/opengl-driver"
-        mkdir -p /run/opengl-driver
-        ln -sfT /nix/store/wdwzqr4z406anyym15qyqf8imk1nvi04-non-nixos-gpu /run/opengl-driver
-        eend $?
-    }
-  '';
-
   # Devuan (OpenRC) Setup Helper
   home.file.".local/bin/setup-dms-greeter".text = ''
     #!/bin/bash
@@ -114,7 +113,7 @@ EOF
 
     # 8. Install and enable GPU persistence service
     echo "🔌 Installing nix-gpu-link OpenRC service..."
-    sudo cp $HOME/.neon-devuan/modules/init.d/nix-gpu-link /etc/init.d/nix-gpu-link
+    sudo cp ${gpu-link-service} /etc/init.d/nix-gpu-link
     sudo chmod +x /etc/init.d/nix-gpu-link
     sudo rc-update add nix-gpu-link boot
     sudo rc-service nix-gpu-link start
