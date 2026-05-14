@@ -53,7 +53,17 @@ in
         sudo apt update && sudo apt install -y greetd
     fi
     
-    # 2. Create cache directory
+    # 2. Ensure greeter user and group exist (usually handled by apt, but let's be sure)
+    if ! getent group greeter > /dev/null; then
+        echo "👥 Creating greeter group..."
+        sudo groupadd -r greeter
+    fi
+    if ! getent passwd greeter > /dev/null; then
+        echo "👤 Creating greeter user..."
+        sudo useradd -r -g greeter -d /var/lib/greetd -s /sbin/nologin -c "greetd greeter user" greeter
+    fi
+
+    # 3. Create cache directory
     echo "📁 Creating cache directory /var/cache/dms-greeter..."
     sudo mkdir -p /var/cache/dms-greeter
     sudo chown greeter:greeter /var/cache/dms-greeter
