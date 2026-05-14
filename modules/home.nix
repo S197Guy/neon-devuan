@@ -6,6 +6,7 @@
     ./openrc.nix
     ./kitty.nix
     ./theme.nix
+    ./greeter.nix
   ];
 
   home.username = "neonscar";
