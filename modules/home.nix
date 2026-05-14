@@ -13,6 +13,8 @@
   targets.genericLinux.enable = true;
   systemd.user.enable = false;
 
+  fonts.fontconfig.enable = true;
+
   home.packages = with pkgs; [
     # Core Tools
     git
@@ -30,7 +32,7 @@
     
     # Fonts
     jetbrains-mono
-    (nerdfonts.override { fonts = [ "JetBrainsMono" ]; })
+    nerd-fonts.jetbrains-mono
     
     # nixGL for hardware acceleration
   ];
