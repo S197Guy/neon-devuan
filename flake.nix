@@ -21,9 +21,11 @@
     };
 
     nixgl.url = "github:nix-community/nixGL";
+
+    catppuccin.url = "github:catppuccin/nix";
   };
 
-  outputs = { self, nixpkgs, home-manager, mangowm, dms, nixgl, ... }@inputs:
+  outputs = { self, nixpkgs, home-manager, mangowm, dms, nixgl, catppuccin, ... }@inputs:
     let
       system = "x86_64-linux";
       pkgs = nixpkgs.legacyPackages.${system};
@@ -39,6 +41,7 @@
         modules = [
           ./modules/home.nix
           dms.homeModules.dank-material-shell
+          catppuccin.homeModules.catppuccin
         ];
       };
     };

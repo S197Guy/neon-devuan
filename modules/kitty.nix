@@ -5,6 +5,8 @@
   home.packages = [ pkgs.kitty ];
 
   xdg.configFile."kitty/kitty.conf".text = ''
+    font_family      JetBrainsMono Nerd Font
+    font_size        11.0
     shell_integration no-rc
     background_opacity 0.66
     include dank-tabs.conf

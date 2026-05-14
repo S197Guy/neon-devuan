@@ -4,6 +4,8 @@
   imports = [
     ./mangowm.nix
     ./openrc.nix
+    ./kitty.nix
+    ./theme.nix
   ];
 
   home.username = "neonscar";
@@ -19,7 +21,6 @@
     # Core Tools
     git
     vim
-    kitty
     chromium
     
     # Mango/DMS Dependencies
@@ -39,15 +40,6 @@
 
   # Enable Dank Material Shell (AvengeMedia version)
   programs.dank-material-shell.enable = true;
-
-  programs.kitty = {
-    enable = true;
-    settings = {
-      font_family = "JetBrainsMono Nerd Font";
-      font_size = 11;
-      background_opacity = "0.9";
-    };
-  };
 
   programs.home-manager.enable = true;
 }

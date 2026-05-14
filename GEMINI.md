@@ -16,7 +16,7 @@ This file serves as a context bridge for Gemini CLI to understand the project hi
 
 ## 🛠️ Critical Fixes & Knowledge
 1. **Nix Installation:** Must use the --init none flag on Devuan to bypass systemd detection.
-2. **GPU Setup (Devuan):** The `non-nixos-gpu-setup` script fails due to a `systemd-tmpfiles` dependency. Manually create the required symlink: `sudo ln -sfT /nix/store/mz8v1mak8d64vd2gcw5cfv8idyxs0xgx-non-nixos-gpu /run/opengl-driver`.
+2. **GPU Setup (Devuan):** The `non-nixos-gpu-setup` script fails due to a `systemd-tmpfiles` dependency. Manually create the required symlink: `sudo ln -sfT /nix/store/wdwzqr4z406anyym15qyqf8imk1nvi04-non-nixos-gpu /run/opengl-driver`.
 3. **Nix-Daemon (OpenRC):** A custom init script exists at modules/init.d/nix-daemon. It uses "use net" instead of "need net" to avoid virtual service conflicts.
 4. **EGL/OpenGL Fix:** On non-NixOS, MangoWM fails to initialize EGL. Use the start-neon wrapper which runs nixGLIntel mango.
 4. **Catppuccin Module:** The Home Manager module name was corrected to catppuccin.homeModules.catppuccin.

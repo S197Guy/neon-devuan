@@ -12,14 +12,13 @@
     nerd-fonts.jetbrains-mono
     nerd-fonts.noto
     noto-fonts
-    noto-fonts-emoji
+    noto-fonts-color-emoji
   ];
 
-  # GTK Theming via the Catppuccin Flake
+  # GTK Theming (catppuccin.gtk is deprecated)
   gtk.enable = true;
-  catppuccin.gtk.enable = true;
-  catppuccin.gtk.flavor = "mocha";
-  catppuccin.gtk.accent = "pink";
+
+  dconf.enable = false;
 
   # Cursors
   catppuccin.cursors.enable = true;
