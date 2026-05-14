@@ -109,12 +109,25 @@ EOF
     echo "⚙️ Configuring /etc/greetd/config.toml..."
     GREETER_BIN="${greeter-script}/bin/dms-greeter-wrapped"
     sudo tee /etc/greetd/config.toml << EOF
+[terminal]
+vt = 7
+
 [default_session]
 user = "greeter"
 command = "$GREETER_BIN"
 EOF
 
-    # 8. Install and enable GPU persistence service
+    # 8. Initialize greeter cache with user's current settings
+    echo "🎨 Initializing greeter cache from current user settings..."
+    # We copy the session/settings if they exist
+    mkdir -p ~/.local/state/DankMaterialShell
+    [ -f ~/.local/state/DankMaterialShell/session.json ] && sudo cp ~/.local/state/DankMaterialShell/session.json /var/cache/dms-greeter/
+    [ -f ~/.config/DankMaterialShell/settings.json ] && sudo cp ~/.config/DankMaterialShell/settings.json /var/cache/dms-greeter/
+    # Also need a dummy session.json if none exists to avoid UI errors
+    if [ ! -f /var/cache/dms-greeter/session.json ]; then
+        echo "{}" | sudo tee /var/cache/dms-greeter/session.json
+    fi
+    sudo chown -R greeter:greeter /var/cache/dms-greeter
     echo "🔌 Installing nix-gpu-link OpenRC service..."
     sudo cp ${gpu-link-service} /etc/init.d/nix-gpu-link
     sudo chmod +x /etc/init.d/nix-gpu-link

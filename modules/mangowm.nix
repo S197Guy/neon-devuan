@@ -47,7 +47,8 @@
     export WLR_NO_HARDWARE_CURSORS=1
     
     # Launch MangoWM with hardware acceleration on Devuan
-    nixGLIntel mango
+    # Use absolute paths to ensure it works from the greeter session
+    $HOME/.nix-profile/bin/nixGLIntel $HOME/.nix-profile/bin/mango
   '';
   
   home.file.".local/bin/start-neon".executable = true;
