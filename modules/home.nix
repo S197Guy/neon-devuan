@@ -36,6 +36,10 @@
     jetbrains-mono
     nerd-fonts.jetbrains-mono
     
+    # Audio Control
+    wireplumber
+    pulseaudio
+    
     # nixGL for hardware acceleration
   ];
 

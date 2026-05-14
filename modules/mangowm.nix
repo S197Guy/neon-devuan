@@ -30,6 +30,11 @@
     # Authentication Agent
     exec-once = lxqt-policykit-agent
     
+    # Audio Stack (Pipewire)
+    exec-once = pipewire
+    exec-once = pipewire-pulse
+    exec-once = wireplumber
+    
     # XWayland Support (for X11 app compatibility)
     exec-once = xwayland-satellite
     
