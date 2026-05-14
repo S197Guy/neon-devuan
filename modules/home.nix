@@ -40,6 +40,9 @@
     wireplumber
     pulseaudio
     
+    # Networking Control
+    networkmanager
+    
     # nixGL for hardware acceleration
   ];
 
