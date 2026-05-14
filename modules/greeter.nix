@@ -19,7 +19,10 @@ let
     
     start() {
         ebegin "Linking Nix GPU driver to /run/opengl-driver"
-        mkdir -p /run/opengl-driver
+        # If it's a real directory, remove it so we can create the symlink
+        if [ -d "/run/opengl-driver" ] && [ ! -L "/run/opengl-driver" ]; then
+            rmdir "/run/opengl-driver"
+        fi
         ln -sfT /nix/store/wdwzqr4z406anyym15qyqf8imk1nvi04-non-nixos-gpu /run/opengl-driver
         eend $?
     }
