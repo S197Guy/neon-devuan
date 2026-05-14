@@ -4,7 +4,6 @@ let
   dms-shell = inputs.dms.packages.${pkgs.system}.dms-shell;
   quickshell = inputs.dms.packages.${pkgs.system}.quickshell;
   mango = inputs.mangowm.packages.${pkgs.system}.default;
-  
   nixGL = inputs.nixgl.packages.${pkgs.system}.nixGLIntel;
   
   greeter-script = pkgs.writeShellScriptBin "dms-greeter-wrapped" ''
@@ -38,11 +37,29 @@ in
 {
   home.packages = [ greeter-script ];
   
+  # Helper for OpenRC persistence
+  home.file."modules/init.d/nix-gpu-link".text = ''
+    #!/sbin/openrc-run
+    # OpenRC service to ensure Nix GPU driver link exists on boot
+    
+    description="Nix GPU driver symlink for non-NixOS"
+    
+    depend() {
+        need localmount
+        before greetd
+    }
+    
+    start() {
+        ebegin "Linking Nix GPU driver to /run/opengl-driver"
+        mkdir -p /run/opengl-driver
+        ln -sfT /nix/store/wdwzqr4z406anyym15qyqf8imk1nvi04-non-nixos-gpu /run/opengl-driver
+        eend $?
+    }
+  '';
+
   # Devuan (OpenRC) Setup Helper
   home.file.".local/bin/setup-dms-greeter".text = ''
     #!/bin/bash
-    # setup-dms-greeter for Devuan (OpenRC)
-    
     set -e
     
     echo "🌸 Setting up DMS Greeter on Devuan..."
@@ -53,40 +70,60 @@ in
         sudo apt update && sudo apt install -y greetd
     fi
     
-    # 2. Ensure greeter user and group exist (usually handled by apt, but let's be sure)
+    # 2. Ensure greeter user and group exist
     if ! getent group greeter > /dev/null; then
-        echo "👥 Creating greeter group..."
         sudo groupadd -r greeter
     fi
     if ! getent passwd greeter > /dev/null; then
-        echo "👤 Creating greeter user..."
         sudo useradd -r -g greeter -d /var/lib/greetd -s /sbin/nologin -c "greetd greeter user" greeter
     fi
 
-    # 3. Create cache directory
+    # 3. Add greeter to necessary groups for Wayland/GPU
+    echo "👥 Adding greeter to video and input groups..."
+    sudo usermod -aG video,input greeter || true
+    
+    # 4. Create cache directory
     echo "📁 Creating cache directory /var/cache/dms-greeter..."
     sudo mkdir -p /var/cache/dms-greeter
     sudo chown greeter:greeter /var/cache/dms-greeter
     sudo chmod 0750 /var/cache/dms-greeter
     
-    # 3. Configure greetd
+    # 5. Ensure Wayland Sessions directory exists
+    echo "📂 Setting up wayland-sessions directory..."
+    sudo mkdir -p /usr/share/wayland-sessions
+    
+    # 6. Create start-neon.desktop session
+    echo "📄 Creating start-neon.desktop session..."
+    sudo tee /usr/share/wayland-sessions/start-neon.desktop << EOF
+[Desktop Entry]
+Name=neon-Devuan (MangoWM)
+Comment=Dank Material Shell on MangoWM
+Exec=$HOME/.local/bin/start-neon
+Type=Application
+DesktopNames=mango;wlroots
+EOF
+
+    # 7. Configure greetd
     echo "⚙️ Configuring /etc/greetd/config.toml..."
     GREETER_BIN="${greeter-script}/bin/dms-greeter-wrapped"
-    
     sudo tee /etc/greetd/config.toml << EOF
 [default_session]
 user = "greeter"
 command = "$GREETER_BIN"
 EOF
 
-    # 4. Enable and start service
+    # 8. Install and enable GPU persistence service
+    echo "🔌 Installing nix-gpu-link OpenRC service..."
+    sudo cp $HOME/.neon-devuan/modules/init.d/nix-gpu-link /etc/init.d/nix-gpu-link
+    sudo chmod +x /etc/init.d/nix-gpu-link
+    sudo rc-update add nix-gpu-link boot
+    sudo rc-service nix-gpu-link start
+    
+    # 9. Enable greetd
     echo "🚀 Enabling greetd service..."
     sudo rc-update add greetd default
     
-    # Note: We don't restart here to avoid kicking the user out of their current session
-    echo "✅ Setup complete!"
-    echo "To activate the greeter, run: sudo rc-service greetd restart"
-    echo "Make sure you are in a TTY (Ctrl+Alt+F1) if you do this."
+    echo "✅ Setup complete! Restart your machine or run: sudo rc-service greetd restart"
   '';
   
   home.file.".local/bin/setup-dms-greeter".executable = true;
