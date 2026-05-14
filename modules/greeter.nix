@@ -15,7 +15,7 @@ let
       pkgs.glib      # for gdbus
       pkgs.jq        # for session/settings processing
       pkgs.coreutils
-      pkgs.grep
+      pkgs.gnugrep
       pkgs.util-linux # for mktemp
       pkgs.bash
       nixGL
