@@ -13,7 +13,7 @@ let
     description="Nix GPU driver symlink for non-NixOS"
     
     depend() {
-        need localmount
+        use mountall.sh
         before greetd
     }
     
