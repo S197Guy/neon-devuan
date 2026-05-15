@@ -23,6 +23,7 @@
     
     # Keybinds
     bind = SUPER, B, spawn, chromium
+    bind = SUPER, E, spawn, thunar
     bind = SUPER, Return, spawn, kitty
     bind = SUPER, Q, killclient,
     bind = SUPER, M, quit,

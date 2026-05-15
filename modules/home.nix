@@ -23,6 +23,7 @@
     git
     vim
     chromium
+    xfce.thunar
     
     # Mango/DMS Dependencies
     matugen
