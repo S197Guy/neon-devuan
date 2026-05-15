@@ -26,6 +26,7 @@
     bind = SUPER, Return, spawn, kitty
     bind = SUPER, Q, killclient,
     bind = SUPER, M, quit,
+    bind = SUPER, Space, spawn, nixGLIntel dms ipc call spotlight toggle
     
     # Screenshots
     bind = , Print, spawn, nixGLIntel dms screenshot
