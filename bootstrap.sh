@@ -9,7 +9,7 @@ echo "🌸 Starting neon-Devuan Bootstrap..."
 # 1. Install System Dependencies
 echo "📦 Installing base system dependencies..."
 sudo apt update
-sudo apt install -y build-essential cmake meson pkg-config libegl1 mesa-vulkan-drivers libgl1-mesa-dri elogind libpam-elogind git curl xz-utils unzip fontconfig alsa-utils pipewire pipewire-audio-client-libraries wireplumber network-manager network-manager-openvpn network-manager-vpnc network-manager-openconnect bluez blueman pavucontrol
+sudo apt install -y build-essential cmake meson pkg-config libegl1 mesa-vulkan-drivers libgl1-mesa-dri elogind libpam-elogind git curl xz-utils unzip fontconfig alsa-utils pipewire pipewire-audio-client-libraries wireplumber network-manager network-manager-openvpn network-manager-vpnc network-manager-openconnect bluez blueman pavucontrol rfkill libspa-0.2-bluetooth
 
 # 2. Install Nix (OpenRC Optimized)
 if ! command -v nix &> /dev/null; then
