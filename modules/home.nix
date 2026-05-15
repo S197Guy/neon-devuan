@@ -43,6 +43,7 @@
     
     # Networking & Bluetooth Control
     networkmanager
+    network-manager-applet
     blueman
     
     # nixGL for hardware acceleration

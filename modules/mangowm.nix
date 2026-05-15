@@ -26,12 +26,7 @@
     bind = SUPER, Return, spawn, kitty
     bind = SUPER, Q, killclient,
     bind = SUPER, M, quit,
-    bind = SUPER, Space, spawn, nixGLIntel dms ipc call spotlight toggle
-    
-    # Screenshots
-    bind = , Print, spawn, nixGLIntel dms screenshot
-    bind = SUPER, Print, spawn, nixGLIntel dms screenshot full
-    
+
     # Authentication Agent
     exec-once = lxqt-policykit-agent
     
@@ -42,6 +37,10 @@
     
     # XWayland Support (for X11 app compatibility)
     exec-once = xwayland-satellite
+    
+    # Network and Bluetooth Applets
+    exec-once = nm-applet
+    exec-once = blueman-applet
     
     # Launch Dank Material Shell (DMS) on startup (wrapped for GL acceleration)
     exec-once = nixGLIntel dms run
@@ -55,6 +54,11 @@
     source-optional=~/.config/mango/dms/cursor.conf
     source-optional=~/.config/mango/dms/layout.conf
     source-optional=~/.config/mango/dms/outputs.conf
+
+    # Override/Additional Binds (Absolute paths for reliability)
+    bind = SUPER, Space, spawn, nixGLIntel dms ipc call spotlight toggle
+    bind = , Print, spawn, nixGLIntel dms screenshot
+    bind = SUPER, Print, spawn, nixGLIntel dms screenshot full
   '';
   
   # Helper script to launch MangoWM with nixGL
