@@ -58,7 +58,7 @@
     # Override/Additional Binds (Absolute paths for reliability)
     bind = SUPER, Space, spawn, nixGLIntel dms ipc call spotlight toggle
     bind = SUPER, P, spawn, nixGLIntel dms screenshot
-    bind = SUPER_SHIFT, P, spawn, nixGLIntel dms screenshot full
+    bind = SUPER+SHIFT, P, spawn, nixGLIntel dms screenshot full
   '';
   
   # Helper script to launch MangoWM with nixGL
