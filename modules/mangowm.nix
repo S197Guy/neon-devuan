@@ -43,6 +43,13 @@
     
     # Set resolution at startup (e.g., eDP-1 for physical laptop displays)
     # exec-once = wlr-randr --output eDP-1 --mode 1920x1080@60Hz
+
+    # Source DMS-generated configurations optionally
+    source-optional=~/.config/mango/dms/colors.conf
+    source-optional=~/.config/mango/dms/binds.conf
+    source-optional=~/.config/mango/dms/cursor.conf
+    source-optional=~/.config/mango/dms/layout.conf
+    source-optional=~/.config/mango/dms/outputs.conf
   '';
   
   # Helper script to launch MangoWM with nixGL
