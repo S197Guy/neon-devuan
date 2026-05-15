@@ -13,10 +13,22 @@
     nerd-fonts.noto
     noto-fonts
     noto-fonts-color-emoji
+    adw-gtk3
+    papirus-icon-theme
   ];
 
-  # GTK Theming (catppuccin.gtk is deprecated)
-  gtk.enable = true;
+  # GTK Theming (adw-gtk3 is recommended for DMS/Matugen)
+  gtk = {
+    enable = true;
+    theme = {
+      name = "adw-gtk3-dark";
+      package = pkgs.adw-gtk3;
+    };
+    iconTheme = {
+      name = "Papirus-Dark";
+      package = pkgs.papirus-icon-theme;
+    };
+  };
 
   dconf.enable = false;
 

@@ -22,7 +22,6 @@
     # Core Tools
     git
     vim
-    chromium
     xfce.thunar
     
     # Mango/DMS Dependencies
@@ -52,6 +51,15 @@
 
   # Enable Dank Material Shell (AvengeMedia version)
   programs.dank-material-shell.enable = true;
+
+  programs.chromium = {
+    enable = true;
+    commandLineArgs = [
+      "--gtk-version=4"
+      "--enable-features=WebRTCPipeWireCapturer"
+      "--force-dark-mode"
+    ];
+  };
 
   programs.home-manager.enable = true;
 }
