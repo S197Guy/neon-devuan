@@ -39,9 +39,11 @@
     # Audio Control
     wireplumber
     pulseaudio
+    pavucontrol
     
-    # Networking Control
+    # Networking & Bluetooth Control
     networkmanager
+    blueman
     
     # nixGL for hardware acceleration
   ];
