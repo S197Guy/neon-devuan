@@ -27,6 +27,10 @@
     bind = SUPER, Q, killclient,
     bind = SUPER, M, quit,
     
+    # Screenshots
+    bind = , Print, spawn, nixGLIntel dms screenshot
+    bind = SUPER, Print, spawn, nixGLIntel dms screenshot full
+    
     # Authentication Agent
     exec-once = lxqt-policykit-agent
     
