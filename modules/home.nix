@@ -12,6 +12,7 @@
   home.username = "neonscar";
   home.homeDirectory = "/home/neonscar";
   home.stateVersion = "23.11";
+  home.backupFileExtension = "hm-bak";
 
   targets.genericLinux.enable = true;
   systemd.user.enable = false;
