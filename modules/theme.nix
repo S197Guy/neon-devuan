@@ -1,4 +1,4 @@
-{ pkgs, ... }:
+{ pkgs, lib, ... }:
 
 {
   # Global Catppuccin enablement
@@ -21,12 +21,12 @@
   gtk = {
     enable = true;
     theme = {
-      name = "adw-gtk3-dark";
-      package = pkgs.adw-gtk3;
+      name = lib.mkForce "adw-gtk3-dark";
+      package = lib.mkForce pkgs.adw-gtk3;
     };
     iconTheme = {
-      name = "Papirus-Dark";
-      package = pkgs.papirus-icon-theme;
+      name = lib.mkForce "Papirus-Dark";
+      package = lib.mkForce pkgs.papirus-icon-theme;
     };
   };
 
