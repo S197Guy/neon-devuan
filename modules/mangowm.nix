@@ -26,6 +26,9 @@
     bind = SUPER, Return, spawn, kitty
     bind = SUPER, Q, killclient,
     bind = SUPER, M, quit,
+    bind = SUPER, Space, spawn, $HOME/.nix-profile/bin/nixGLIntel dms ipc call spotlight toggle
+    bind = SUPER, P, spawn, $HOME/.nix-profile/bin/nixGLIntel dms screenshot
+    bind = SUPER+SHIFT, P, spawn, $HOME/.nix-profile/bin/nixGLIntel dms screenshot full
 
     # Authentication Agent
     exec-once = lxqt-policykit-agent
@@ -54,11 +57,6 @@
     source-optional=~/.config/mango/dms/cursor.conf
     source-optional=~/.config/mango/dms/layout.conf
     source-optional=~/.config/mango/dms/outputs.conf
-
-    # Override/Additional Binds (Absolute paths for reliability)
-    bind = SUPER, Space, spawn, nixGLIntel dms ipc call spotlight toggle
-    bind = SUPER, P, spawn, nixGLIntel dms screenshot
-    bind = SUPER+SHIFT, P, spawn, nixGLIntel dms screenshot full
   '';
   
   # Helper script to launch MangoWM with nixGL
