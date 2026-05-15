@@ -26,7 +26,8 @@
     bind = SUPER, E, spawn, thunar
     bind = SUPER, Return, spawn, kitty
     bind = SUPER, Q, killclient,
-    bind = SUPER, M, quit,
+    bind = SUPER, M, reload_config
+    bind = SUPER+SHIFT, M, quit
     bind = SUPER, Space, spawn, $HOME/.nix-profile/bin/nixGLIntel dms ipc call spotlight toggle
     bind = SUPER, P, spawn, $HOME/.nix-profile/bin/nixGLIntel dms screenshot
     bind = SUPER+SHIFT, P, spawn, $HOME/.nix-profile/bin/nixGLIntel dms screenshot full
