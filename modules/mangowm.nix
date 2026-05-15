@@ -18,6 +18,9 @@
     shadows = 1
     blur = 1
     
+    # Input Configuration
+    xkb_layout = us
+    
     # Misc
     cursor_size = 32
     
@@ -26,6 +29,11 @@
     bind = SUPER, Return, spawn, kitty
     bind = SUPER, Q, killclient,
     bind = SUPER, M, quit,
+    
+    # Audio Control (Media Keys)
+    bind = , XF86AudioRaiseVolume, spawn, wpctl set-volume @DEFAULT_AUDIO_SINK@ 5%+
+    bind = , XF86AudioLowerVolume, spawn, wpctl set-volume @DEFAULT_AUDIO_SINK@ 5%-
+    bind = , XF86AudioMute, spawn, wpctl set-mute @DEFAULT_AUDIO_SINK@ toggle
 
     # Authentication Agent
     exec-once = lxqt-policykit-agent
@@ -58,6 +66,7 @@
     # Override/Additional Binds (Absolute paths for reliability)
     bind = SUPER, Space, spawn, nixGLIntel dms ipc call spotlight toggle
     bind = , Print, spawn, nixGLIntel dms screenshot
+    bind = , Sys_Req, spawn, nixGLIntel dms screenshot
     bind = SUPER, Print, spawn, nixGLIntel dms screenshot full
   '';
   
