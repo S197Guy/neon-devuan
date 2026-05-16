@@ -28,13 +28,14 @@
       name = lib.mkForce "Papirus-Dark";
       package = lib.mkForce pkgs.papirus-icon-theme;
     };
+    gtk4.extraConfig.gtk-application-prefer-dark-theme = 1;
   };
 
   dconf.enable = false;
 
   home.sessionVariables = {
     GTK_THEME = "adw-gtk3-dark";
-    QT_QPA_PLATFORMTHEME = "gtk3";
+    QT_QPA_PLATFORMTHEME = lib.mkForce "gtk3";
     XCURSOR_THEME = "Papirus-Dark";
   };
 

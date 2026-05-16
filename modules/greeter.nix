@@ -1,10 +1,10 @@
 { pkgs, inputs, ... }:
 
 let
-  dms-shell = inputs.dms.packages.${pkgs.system}.dms-shell;
-  quickshell = inputs.dms.packages.${pkgs.system}.quickshell;
-  mango = inputs.mangowm.packages.${pkgs.system}.default;
-  nixGL = inputs.nixgl.packages.${pkgs.system}.nixGLIntel;
+  dms-shell = inputs.dms.packages.${pkgs.stdenv.hostPlatform.system}.dms-shell;
+  quickshell = inputs.dms.packages.${pkgs.stdenv.hostPlatform.system}.quickshell;
+  mango = inputs.mangowm.packages.${pkgs.stdenv.hostPlatform.system}.default;
+  nixGL = inputs.nixgl.packages.${pkgs.stdenv.hostPlatform.system}.nixGLIntel;
   
   gpu-link-service = pkgs.writeText "nix-gpu-link" ''
     #!/sbin/openrc-run

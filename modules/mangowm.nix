@@ -2,8 +2,8 @@
 
 {
   home.packages = [
-    inputs.mangowm.packages.${pkgs.system}.default
-    inputs.nixgl.packages.${pkgs.system}.nixGLIntel
+    inputs.mangowm.packages.${pkgs.stdenv.hostPlatform.system}.default
+    inputs.nixgl.packages.${pkgs.stdenv.hostPlatform.system}.nixGLIntel
     pkgs.wlr-randr
     pkgs.lxqt.lxqt-policykit
     pkgs.xwayland-satellite

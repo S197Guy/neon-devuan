@@ -22,7 +22,7 @@
     # Core Tools
     git
     vim
-    xfce.thunar
+    thunar
     
     # Mango/DMS Dependencies
     matugen
