@@ -36,6 +36,10 @@
     jetbrains-mono
     nerd-fonts.jetbrains-mono
     
+    # GTK Support
+    gnome-themes-extra
+    adwaita-icon-theme
+    
     # Audio Control
     wireplumber
     pulseaudio
@@ -55,9 +59,10 @@
   programs.chromium = {
     enable = true;
     commandLineArgs = [
-      "--gtk-version=4"
+      "--gtk-version=3"
       "--enable-features=WebRTCPipeWireCapturer"
       "--force-dark-mode"
+      "--enable-dark-mode"
     ];
   };
 

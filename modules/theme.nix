@@ -32,6 +32,12 @@
 
   dconf.enable = false;
 
+  home.sessionVariables = {
+    GTK_THEME = "adw-gtk3-dark";
+    QT_QPA_PLATFORMTHEME = "gtk3";
+    XCURSOR_THEME = "Papirus-Dark";
+  };
+
   # Cursors
   catppuccin.cursors.enable = true;
   catppuccin.cursors.flavor = "mocha";
