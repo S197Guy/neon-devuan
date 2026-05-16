@@ -39,6 +39,8 @@
     # GTK Support
     gnome-themes-extra
     adwaita-icon-theme
+    glib # for gsettings
+    gnome-keyring
     
     # Audio Control
     wireplumber

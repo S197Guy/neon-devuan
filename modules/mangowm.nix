@@ -40,6 +40,13 @@
     exec-once = pipewire-pulse
     exec-once = wireplumber
     
+    # Keyring and Secrets
+    exec-once = gnome-keyring-daemon --start --components=secrets,pkcs11,ssh
+    
+    # Force dark mode preference via gsettings
+    exec-once = gsettings set org.gnome.desktop.interface color-scheme 'prefer-dark'
+    exec-once = gsettings set org.gnome.desktop.interface gtk-theme 'adw-gtk3-dark'
+    
     # XWayland Support (for X11 app compatibility)
     exec-once = xwayland-satellite
     
@@ -67,9 +74,20 @@
     # Fix for inverted cursor on virgl/virtualized environments
     export WLR_NO_HARDWARE_CURSORS=1
     
-    # Launch MangoWM with hardware acceleration on Devuan
-    # Use absolute paths to ensure it works from the greeter session
-    $HOME/.nix-profile/bin/nixGLIntel $HOME/.nix-profile/bin/mango
+    # Source Home Manager session variables (crucial for theming)
+    if [ -f "$HOME/.nix-profile/etc/profile.d/hm-session-vars.sh" ]; then
+        . "$HOME/.nix-profile/etc/profile.d/hm-session-vars.sh"
+    fi
+
+    # Launch MangoWM with hardware acceleration and D-Bus session
+    # We use dbus-run-session to ensure apps can find the bus for themes/keyring
+    COMMAND="$HOME/.nix-profile/bin/nixGLIntel $HOME/.nix-profile/bin/mango"
+    
+    if [ -z "$DBUS_SESSION_BUS_ADDRESS" ]; then
+        dbus-run-session -- $COMMAND
+    else
+        $COMMAND
+    fi
   '';
   
   home.file.".local/bin/start-neon".executable = true;
