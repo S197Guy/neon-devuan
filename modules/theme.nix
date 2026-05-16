@@ -28,6 +28,7 @@
       name = lib.mkForce "Papirus-Dark";
       package = lib.mkForce pkgs.papirus-icon-theme;
     };
+    gtk4.theme = null;
     gtk4.extraConfig.gtk-application-prefer-dark-theme = 1;
   };
 
