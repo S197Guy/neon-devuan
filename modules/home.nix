@@ -58,6 +58,24 @@
   # Enable Dank Material Shell (AvengeMedia version)
   programs.dank-material-shell.enable = true;
 
+  programs.zsh = {
+    enable = true;
+    enableCompletion = true;
+    autosuggestion.enable = true;
+    syntaxHighlighting.enable = true;
+    
+    oh-my-zsh = {
+      enable = true;
+      plugins = [ "git" "sudo" "docker" "command-not-found" ];
+      theme = "robbyrussell"; # Classic, but we can change this later
+    };
+
+    shellAliases = {
+      update = "nix run .#home-manager -- switch --flake .#neonscar -b backup";
+      gc = "nix-collect-garbage -d";
+    };
+  };
+
   programs.chromium = {
     enable = true;
     commandLineArgs = [
