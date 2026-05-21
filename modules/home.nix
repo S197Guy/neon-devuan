@@ -23,6 +23,7 @@
     git
     vim
     thunar
+    fastfetch
     
     # Mango/DMS Dependencies
     matugen
@@ -67,8 +68,12 @@
     oh-my-zsh = {
       enable = true;
       plugins = [ "git" "sudo" "docker" "command-not-found" ];
-      theme = "robbyrussell"; # Classic, but we can change this later
     };
+
+    initExtra = ''
+      # Terminal Greeter
+      fastfetch
+    '';
 
     shellAliases = {
       update = "nix run .#home-manager -- switch --flake .#neonscar -b backup";
@@ -84,6 +89,18 @@
       "--force-dark-mode"
       "--enable-dark-mode"
     ];
+  };
+
+  programs.starship = {
+    enable = true;
+    # Catppuccin Mocha preset logic (minimal version)
+    settings = {
+      add_newline = true;
+      character = {
+        success_symbol = "[➜](bold green)";
+        error_symbol = "[➜](bold red)";
+      };
+    };
   };
 
   programs.home-manager.enable = true;
